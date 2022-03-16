@@ -11,6 +11,7 @@
       active-class="primary--text"
       column
       class="buttons"
+      @change.once="goNext"
     >
       <v-chip
         v-for="(point, i) in question.answerPoint"
@@ -27,6 +28,8 @@
 </template>
 
 <script>
+let timeoutId
+
 export default {
   name: 'QuestionForm',
   props: {
@@ -38,6 +41,14 @@ export default {
     }
   },
   mounted() {},
+  methods: {
+    goNext() {
+      clearTimeout(timeoutId)
+      timeoutId = setTimeout(() => {
+        this.$emit('goNext')
+      }, 200)
+    },
+  },
 }
 </script>
 

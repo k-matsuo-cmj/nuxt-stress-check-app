@@ -5,6 +5,7 @@
         <div>{{ `${n} / ${length} ` }}</div>
         <question-form
           :question="$store.getters['question/getById'](ids[n - 1])"
+          @goNext="next"
         />
       </v-window-item>
     </v-window>
