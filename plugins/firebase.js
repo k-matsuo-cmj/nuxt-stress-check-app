@@ -1,7 +1,7 @@
 import { getApp, getApps, initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 
-export default ({ $config }, inject) => {
+export default ({ $config, store }, inject) => {
   // configulation
   const firebaseConfig = {
     apiKey: $config.firebase.apiKey,
@@ -18,4 +18,9 @@ export default ({ $config }, inject) => {
   const auth = getAuth(app)
 
   inject('auth', auth)
+
+  // if reload...
+  new Promise((resolve) => {
+    auth.onAuthStateChanged((user) => resolve(user || false))
+  }).then((user) => store.dispatch('setUser', user))
 }
