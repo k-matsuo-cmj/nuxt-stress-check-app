@@ -6,6 +6,7 @@
         <question-form
           :question="$store.getters['question/getById'](ids[n - 1])"
           @goNext="next"
+          @changeValue="setAnswer"
         />
       </v-window-item>
     </v-window>
@@ -29,6 +30,7 @@ export default {
       index: 0,
       length: 57,
       ids: [],
+      answers: [],
     }
   },
   mounted() {
@@ -40,6 +42,16 @@ export default {
     },
     next() {
       if (this.index < this.length - 1) this.index++
+    },
+    setAnswer(answer) {
+      const index = this.answers.findIndex((el) => el.id === answer.id)
+      if (index < 0) {
+        this.answers.push({ ...answer })
+      } else if (answer.point) {
+        this.answers[index] = answer.point
+      } else {
+        this.answers.splice(index, 1)
+      }
     },
   },
 }

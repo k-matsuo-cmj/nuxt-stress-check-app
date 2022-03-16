@@ -40,6 +40,14 @@ export default {
       selected: null,
     }
   },
+  watch: {
+    selected(value) {
+      this.$emit('changeValue', {
+        id: this.question.id,
+        point: value,
+      })
+    },
+  },
   mounted() {},
   methods: {
     goNext() {
