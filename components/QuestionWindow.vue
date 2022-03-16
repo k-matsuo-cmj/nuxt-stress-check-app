@@ -33,13 +33,18 @@ export default {
   data() {
     return {
       index: 0,
-      length: 57,
       ids: [],
       answers: [],
     }
   },
+  computed: {
+    length() {
+      return this.ids.length
+    },
+  },
   mounted() {
     this.ids = this.$store.getters['question/ids']
+    this.answers = []
   },
   methods: {
     prev() {
@@ -53,7 +58,7 @@ export default {
       if (index < 0) {
         this.answers.push({ ...answer })
       } else if (answer.point) {
-        this.answers[index] = answer.point
+        this.answers[index] = { ...answer }
       } else {
         this.answers.splice(index, 1)
       }
