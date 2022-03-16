@@ -1,13 +1,18 @@
 <template>
   <v-card>
     <v-window v-model="index">
-      <v-window-item v-for="n in length" :key="n">
-        <div>{{ `${n} / ${length} ` }}</div>
-        <question-form
-          :question="$store.getters['question/getById'](ids[n - 1])"
-          @goNext="next"
-          @changeValue="setAnswer"
-        />
+      <v-window-item v-for="n in length + 1" :key="n">
+        <template v-if="n <= length">
+          <div>{{ `${n} / ${length} ` }}</div>
+          <question-form
+            :question="$store.getters['question/getById'](ids[n - 1])"
+            @goNext="next"
+            @changeValue="setAnswer"
+          />
+        </template>
+        <template v-else>
+          <submit-form :ids="ids" :answers="answers" />
+        </template>
       </v-window-item>
     </v-window>
     <v-card-actions class="justify-space-between">
@@ -15,7 +20,7 @@
         <v-icon>mdi-chevron-left</v-icon>
       </v-btn>
       <v-spacer />
-      <v-btn text :disabled="index === length - 1" @click="next">
+      <v-btn text :disabled="index === length" @click="next">
         <v-icon>mdi-chevron-right</v-icon>
       </v-btn>
     </v-card-actions>
@@ -41,7 +46,7 @@ export default {
       if (this.index > 0) this.index--
     },
     next() {
-      if (this.index < this.length - 1) this.index++
+      if (this.index < this.length) this.index++
     },
     setAnswer(answer) {
       const index = this.answers.findIndex((el) => el.id === answer.id)
