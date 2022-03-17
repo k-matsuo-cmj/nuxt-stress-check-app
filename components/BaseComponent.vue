@@ -20,6 +20,8 @@
           <v-btn large color="primary" @click="$store.dispatch('startCheck')">
             開始
           </v-btn>
+          <br />
+          <result-list />
         </div>
       </v-col>
     </v-row>
