@@ -2,11 +2,15 @@ import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 export const state = () => ({
   user: null,
+  checkStarted_at: null,
 })
 
 export const getters = {
   isAuthenticate(state) {
     return !!state.user
+  },
+  isChecking(state) {
+    return !!state.checkStarted_at
   },
 }
 
@@ -21,6 +25,9 @@ export const mutations = {
     } else {
       state.user = null
     }
+  },
+  setChecking(state, flag) {
+    state.checkStarted_at = flag ? new Date() : null
   },
 }
 
@@ -39,5 +46,12 @@ export const actions = {
   async logout({ commit }) {
     await signOut(this.$auth)
     commit('setUser', null)
+  },
+  startCheck({ commit }) {
+    commit('setChecking', true)
+  },
+  finishCheck({ commit }) {
+    // TODO firestore
+    commit('setChecking', false)
   },
 }
