@@ -19,16 +19,14 @@ export default {
   name: 'SubmitForm',
   props: {
     ids: { type: Array, default: null },
-    answers: { type: Array, default: null },
+    answers: { type: Object, default: null },
   },
   computed: {
     isComplete() {
       return !this.unansweredIds.length
     },
     unansweredIds() {
-      return this.ids
-        .filter((id) => this.answers.findIndex((ans) => ans.id === id) === -1)
-        .sort()
+      return this.ids.filter((id) => !this.answers[id]).sort()
     },
   },
   methods: {

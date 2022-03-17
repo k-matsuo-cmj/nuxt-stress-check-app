@@ -34,7 +34,7 @@ export default {
     return {
       index: 0,
       ids: [],
-      answers: [],
+      answers: {},
     }
   },
   computed: {
@@ -44,7 +44,7 @@ export default {
   },
   mounted() {
     this.ids = this.$store.getters['question/ids']
-    this.answers = []
+    this.answers = {}
   },
   methods: {
     prev() {
@@ -54,13 +54,10 @@ export default {
       if (this.index < this.length) this.index++
     },
     setAnswer(answer) {
-      const index = this.answers.findIndex((el) => el.id === answer.id)
-      if (index < 0) {
-        this.answers.push({ ...answer })
-      } else if (answer.point) {
-        this.answers[index] = { ...answer }
+      if (answer.point) {
+        this.answers[answer.id] = answer.point
       } else {
-        this.answers.splice(index, 1)
+        delete this.answers[answer.id]
       }
     },
   },
