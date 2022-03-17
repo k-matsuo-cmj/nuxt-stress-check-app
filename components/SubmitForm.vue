@@ -9,7 +9,7 @@
       <p>入力しなおしてください。</p>
     </v-card-title>
     <v-card-actions class="justify-center">
-      <v-btn large :disabled="!isComplete">送信</v-btn>
+      <v-btn large :disabled="!isComplete" @click="submit">送信</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -29,6 +29,11 @@ export default {
       return this.ids
         .filter((id) => this.answers.findIndex((ans) => ans.id === id) === -1)
         .sort()
+    },
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch('finishCheck', { answers: this.answers })
     },
   },
 }

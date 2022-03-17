@@ -1,4 +1,10 @@
 import { signInWithEmailAndPassword, signOut } from 'firebase/auth'
+import {
+  addDoc,
+  collection,
+  serverTimestamp,
+  Timestamp,
+} from 'firebase/firestore'
 
 export const state = () => ({
   user: null,
@@ -27,7 +33,7 @@ export const mutations = {
     }
   },
   setChecking(state, flag) {
-    state.checkStarted_at = flag ? new Date() : null
+    state.checkStarted_at = flag ? Timestamp.now() : null
   },
 }
 
@@ -50,8 +56,15 @@ export const actions = {
   startCheck({ commit }) {
     commit('setChecking', true)
   },
-  finishCheck({ commit }) {
-    // TODO firestore
+  async finishCheck({ commit, state }, { answers }) {
+    // Firestore
+    const resultsRef = collection(this.$db, 'results')
+    await addDoc(resultsRef, {
+      user_id: state.user.uid,
+      started_at: state.checkStarted_at,
+      finished_at: serverTimestamp(),
+      answers,
+    })
     commit('setChecking', false)
   },
 }

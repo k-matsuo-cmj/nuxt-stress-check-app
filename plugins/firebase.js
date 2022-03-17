@@ -1,5 +1,6 @@
 import { getApp, getApps, initializeApp } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
+import { getFirestore } from 'firebase/firestore'
 
 export default ({ $config, store }, inject) => {
   // configulation
@@ -16,8 +17,11 @@ export default ({ $config, store }, inject) => {
   const app = !getApps().length ? initializeApp(firebaseConfig) : getApp()
   // Authenticate
   const auth = getAuth(app)
+  // Firestore
+  const db = getFirestore(app)
 
   inject('auth', auth)
+  inject('db', db)
 
   // if reload...
   new Promise((resolve) => {
