@@ -56,6 +56,8 @@ export const actions = {
   async logout({ commit }) {
     await signOut(this.$auth)
     commit('setUser', null)
+    commit('setChecking', false)
+    commit('setFinished', false)
   },
   startCheck({ commit }) {
     commit('setChecking', true)

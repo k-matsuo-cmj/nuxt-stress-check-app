@@ -34,6 +34,12 @@ export default {
     onSnapshot(resultsQuery, (querySnapshot) => {
       this.list = querySnapshot.docs.map((d) => ({ ...d.data(), id: d.id }))
     })
+
+    if (this.$store.state.finished) {
+      setTimeout(() => {
+        this.openDialog(this.list[0])
+      }, 500)
+    }
   },
   methods: {
     ...judgement,
