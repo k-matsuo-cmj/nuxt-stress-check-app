@@ -1,10 +1,11 @@
 <template>
   <v-card>
     <v-card-title> 過去のストレスチェック結果 </v-card-title>
-    <v-card-text v-for="result in list" :key="result.id">
+    <v-card-text v-for="result in list" :key="result.id" @click="openDialog(result)">
       {{ $dateFns.format(result.finished_at.toDate(), 'yyyy-MM-dd HH:mm') }}
       {{ isHighStress(result.answers) ? '高ストレス' : '異常なし' }}
     </v-card-text>
+    <result-dialog ref="resultDialog" />
   </v-card>
 </template>
 
@@ -36,6 +37,9 @@ export default {
   },
   methods: {
     ...judgement,
+    openDialog(result) {
+      this.$refs.resultDialog.open(result)
+    }
   },
 }
 </script>
