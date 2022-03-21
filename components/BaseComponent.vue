@@ -10,16 +10,31 @@
       <v-col>
         <question-window v-if="$store.getters.isChecking" />
         <div v-else>
-          <p>
-            あなたの職場におけるストレスレベルを測定します。質問は全部で57問です。
-          </p>
-          <p>この検査は、労働安全衛生法に基づくものです。</p>
-          <br />
-          <strong>それではストレスチェックを始めましょう！</strong>
-          <br />
-          <v-btn large color="primary" @click="$store.dispatch('startCheck')">
-            開始
-          </v-btn>
+          <div v-if="$store.state.finished">
+            <p>
+              おつかれさまでした。リストをクリックすると結果を確認できます。
+            </p>
+            <br />
+            <p>
+              もう一度ストレスチェックを実施する場合は、戻るボタンを押してください。
+            </p>
+            <br />
+            <v-btn large @click="$store.dispatch('clearFinished')">
+              戻る
+            </v-btn>
+          </div>
+          <div v-else>
+            <p>
+              あなたの職場におけるストレスレベルを測定します。質問は全部で57問です。
+            </p>
+            <p>この検査は、労働安全衛生法に基づくものです。</p>
+            <br />
+            <strong>それではストレスチェックを始めましょう！</strong>
+            <br />
+            <v-btn large color="primary" @click="$store.dispatch('startCheck')">
+              開始
+            </v-btn>
+          </div>
           <br />
           <result-list />
         </div>
@@ -34,5 +49,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

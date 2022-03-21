@@ -9,6 +9,7 @@ import {
 export const state = () => ({
   user: null,
   checkStarted_at: null,
+  finished: false,
 })
 
 export const getters = {
@@ -34,6 +35,9 @@ export const mutations = {
   },
   setChecking(state, flag) {
     state.checkStarted_at = flag ? Timestamp.now() : null
+  },
+  setFinished(state, flag) {
+    state.finished = flag
   },
 }
 
@@ -66,5 +70,9 @@ export const actions = {
       answers,
     })
     commit('setChecking', false)
+    commit('setFinished', true)
+  },
+  clearFinished({ commit }) {
+    commit('setFinished', false)
   },
 }
