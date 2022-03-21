@@ -11,7 +11,7 @@
           />
         </template>
         <template v-else>
-          <submit-form :ids="ids" :answers="answers" />
+          <submit-form :ids="ids" :answers="{ ...answers }" @jumpPage="jump" />
         </template>
       </v-window-item>
     </v-window>
@@ -52,6 +52,9 @@ export default {
     },
     next() {
       if (this.index < this.length) this.index++
+    },
+    jump(index) {
+      if (index >= 0) this.index = index
     },
     setAnswer(answer) {
       if (answer.point) {
