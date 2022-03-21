@@ -3,7 +3,6 @@
     <v-row>
       <v-col offset-md="6">
         <span> ようこそ {{ $store.state.user.displayName }} さん</span>
-        <v-btn @click="$store.dispatch('logout')">Logout</v-btn>
       </v-col>
     </v-row>
     <v-row>
