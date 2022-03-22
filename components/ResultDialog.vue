@@ -5,7 +5,7 @@
         チェック日時: {{ finshedDatetime }}
       </v-card-text>
       <v-card-text>
-        判定結果: {{ checkResult }}
+        判定結果: <span :class="highStress ? 'red--text' : 'primary--text' ">{{ checkResult }}</span>
       </v-card-text>
       <v-card-text class="px-8">
         <div>
