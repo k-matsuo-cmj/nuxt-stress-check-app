@@ -1,5 +1,5 @@
 <template>
-  <v-card>
+  <v-card class="form">
     <v-card-title v-if="isComplete">
       <p>アンケートは以上です。</p>
       <p>送信してよろしいですか？</p>
@@ -8,7 +8,7 @@
       <p>未回答のアンケートがあります。</p>
       <p>入力しなおしてください。</p>
     </v-card-title>
-    <div class="pa-4">
+    <div class="pa-4 ids">
       <v-chip-group v-model="unansweredId" active-class="primary--text" column>
         <v-chip v-for="id in unansweredIds" :key="id" :value="id">
           {{ id }}
@@ -57,4 +57,12 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+.form {
+  height: 73vh;
+}
+.ids {
+  max-height: 46vh;
+  overflow: scroll;
+}
+</style>

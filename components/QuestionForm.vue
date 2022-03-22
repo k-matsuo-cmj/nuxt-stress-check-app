@@ -1,5 +1,5 @@
 <template>
-  <v-card v-if="question">
+  <v-card v-if="question" class="form" flat>
     <v-card-text>
       {{ question.category.id }}. {{ question.category.text }}
     </v-card-text>
@@ -8,7 +8,7 @@
     }}</v-card-title>
     <v-chip-group
       v-model="selected"
-      active-class="primary--text"
+      active-class="primary white--text"
       column
       class="buttons"
       @change.once="goNext"
@@ -61,12 +61,16 @@ export default {
 </script>
 
 <style scoped>
+.form {
+  height: 70vh;
+}
 .text {
   min-height: 120px;
+  height: 30%;
   white-space: pre-wrap;
 }
 .buttons {
-  max-width: 200px;
+  max-width: 80%;
   padding-left: 10px;
 }
 .button {
