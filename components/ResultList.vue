@@ -1,6 +1,6 @@
 <template>
-  <v-card>
-    <v-card-title> 過去のストレスチェック結果 </v-card-title>
+  <v-card class="resultList">
+    <v-card-title class="text-h6"> 過去のストレスチェック結果 </v-card-title>
     <v-card-text v-for="result in list" :key="result.id" @click="openDialog(result)">
       {{ result.finished_at ? $dateFns.format(result.finished_at.toDate(), 'yyyy-MM-dd HH:mm') : '' }}
       {{ isHighStress(result.answers) ? '高ストレス' : '異常なし' }}
@@ -51,4 +51,8 @@ export default {
 </script>
 
 <style>
+  .resultList {
+    max-height: 48vh;
+    overflow: scroll;
+  }
 </style>

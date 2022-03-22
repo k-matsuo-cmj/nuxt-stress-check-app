@@ -20,7 +20,7 @@
       </v-menu>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container fluid class="main">
         <Nuxt />
       </v-container>
     </v-main>
@@ -37,3 +37,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+  .main {
+    height: 90vh;
+  }
+</style>
